@@ -27,7 +27,7 @@ msgstr "Sematkan di Dok"
 
 #: ../src/Wnck.cpp:200
 msgid "Edit Launcher"
-msgstr "Ubah Peluncur"
+msgstr "Sunting Peluncur"
 
 #: ../src/Wnck.cpp:227
 msgid "Close All"
