@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.3.0\n"
+"Project-Id-Version: 0.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 21:34-0700\n"
-"PO-Revision-Date: 2021-07-22 02:08+0700\n"
+"PO-Revision-Date: 2021-09-28 03:22+0700\n"
 "Last-Translator: Faisal Rachmadin <frachmadin@gmail.com>\n"
 "Language-Team: ID\n"
 "Language: id\n"
@@ -35,7 +35,7 @@ msgstr "Tutup Semua"
 
 #: ../src/Wnck.cpp:245
 msgid "Remove"
-msgstr ""
+msgstr "Hapus"
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format
@@ -138,7 +138,7 @@ msgstr "Penunjuk aktif:"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
-msgstr "Paksa ukuran ikon :"
+msgstr "Paksa ukuran ikon:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
