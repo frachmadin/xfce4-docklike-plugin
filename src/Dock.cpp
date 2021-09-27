@@ -19,13 +19,13 @@ namespace Dock
 	void init()
 	{
 		mBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-		gtk_widget_set_name(GTK_WIDGET(mBox), "docklike-plugin");
-		gtk_style_context_add_class(gtk_widget_get_style_context(GTK_WIDGET(mBox)), "stld");
+		gtk_widget_set_name(mBox, "docklike-plugin");
 
 		if (Settings::dockSize)
 			gtk_widget_set_size_request(mBox, Settings::dockSize, -1);
 
 		gtk_widget_show(mBox);
+		drawGroups();
 
 		// Redraw the panel items when the AppInfos have changed
 		mDrawTimeout.setup(500, []() {
@@ -45,8 +45,7 @@ namespace Dock
 		{
 			group = new Group(appInfo, false);
 			mGroups.push(appInfo, group);
-
-			gtk_container_add(GTK_CONTAINER(mBox), GTK_WIDGET(group->mButton));
+			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 		}
 
 		return group;
@@ -54,15 +53,15 @@ namespace Dock
 
 	void moveButton(Group* moving, Group* dest)
 	{
-		int startpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), GTK_WIDGET(moving->mButton));
-		int destpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), GTK_WIDGET(dest->mButton));
+		int startpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), moving->mButton);
+		int destpos = Help::Gtk::getChildPosition(GTK_CONTAINER(mBox), dest->mButton);
 
 		if (startpos == destpos)
 			return;
 		if (startpos < destpos)
 			--destpos;
 
-		gtk_box_reorder_child(GTK_BOX(mBox), GTK_WIDGET(moving->mButton), destpos);
+		gtk_box_reorder_child(GTK_BOX(mBox), moving->mButton, destpos);
 
 		savePinned();
 	}
@@ -78,7 +77,7 @@ namespace Dock
 			GtkWidget* widget = (GtkWidget*)child->data;
 			Group* group = (Group*)g_object_get_data(G_OBJECT(widget), "group");
 
-			if (group->mPinned)
+			if (group->mPinned && g_file_test(group->mAppInfo->path.c_str(), G_FILE_TEST_IS_REGULAR))
 				pinnedList.push_back(group->mAppInfo->path);
 		}
 
@@ -88,15 +87,11 @@ namespace Dock
 	void drawGroups()
 	{
 		// Remove old groups
-		if (mGroups.size())
-		{
-			for (GList* child = gtk_container_get_children(GTK_CONTAINER(mBox));
-				 child != NULL;
-				 child = child->next)
-				gtk_container_remove(GTK_CONTAINER(mBox), GTK_WIDGET(child->data));
-
-			mGroups.clear();
-		}
+		mGroups.forEach([](std::pair<AppInfo*, Group*> g) -> void { 
+			gtk_widget_destroy(g.second->mButton);
+		});
+		mGroups.clear();
+		Wnck::mGroupWindows.clear();
 
 		// Add pinned groups
 		std::list<std::string> pinnedApps = Settings::pinnedAppList;
@@ -108,24 +103,25 @@ namespace Dock
 			Group* group = new Group(appInfo, true);
 
 			mGroups.push(appInfo, group);
-			gtk_container_add(GTK_CONTAINER(mBox), GTK_WIDGET(group->mButton));
+			gtk_container_add(GTK_CONTAINER(mBox), group->mButton);
 			++it;
 		}
 
-		// Add opened windows
+		// Add open windows
 		for (GList* window_l = wnck_screen_get_windows(Wnck::mWnckScreen);
 			 window_l != NULL;
 			 window_l = window_l->next)
 		{
 			WnckWindow* wnckWindow = WNCK_WINDOW(window_l->data);
-			GroupWindow* groupWindow = new GroupWindow(wnckWindow);
+			gulong windowXID = wnck_window_get_xid(wnckWindow);
+			GroupWindow* groupWindow = Wnck::mGroupWindows.get(windowXID);
 
-			if (Wnck::getActiveWindowXID() == wnck_window_get_xid(wnckWindow))
-				Help::Gtk::cssClassAdd(GTK_WIDGET(groupWindow->mGroupMenuItem->mItem), "active_menu_item");
+			if (groupWindow == NULL)
+				groupWindow = new GroupWindow(wnckWindow);
+			else
+				gtk_container_add(GTK_CONTAINER(mBox), groupWindow->mGroup->mButton);
 
-			Wnck::mGroupWindows.push(wnck_window_get_xid(wnckWindow), groupWindow);
-
-			groupWindow->leaveGroup();
+			Wnck::mGroupWindows.push(windowXID, groupWindow);
 			groupWindow->updateState();
 		}
 

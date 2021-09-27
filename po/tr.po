@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 16:46-0700\n"
+"POT-Creation-Date: 2021-09-22 21:34-0700\n"
 "PO-Revision-Date: 2021-07-20 18:38-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
+"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
 "Language-Team: TR\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -17,22 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
-msgstr ""
+msgstr "Dock'a Sabitlendi"
+
+#: ../src/Wnck.cpp:198
+msgid "Pin to Dock"
+msgstr "Dock'a Sabitle"
 
 #: ../src/Wnck.cpp:199
-msgid "Pin to Dock"
-msgstr ""
-
-#: ../src/Wnck.cpp:200
-#, fuzzy
 msgid "Edit Launcher"
-msgstr "Başlat"
+msgstr "Başlatıcıyı Düzenle"
 
-#: ../src/Wnck.cpp:227
+#: ../src/Wnck.cpp:226
 msgid "Close All"
 msgstr "Tümünü Kapat"
+
+#: ../src/Wnck.cpp:245
+msgid "Remove"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format
@@ -56,34 +59,31 @@ msgstr "Xfce için modern, minimalist bir görev çubuğu"
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_Yardım"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
 msgstr "_Kapat"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Listeyi tek pencerede gösterme"
+msgstr "Yalnızca birden çok pencere için pencere listesini göster"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
 msgstr "Sadece mevcut çalışma alanındaki uygulamaları göster"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
 msgstr "Sadece mevcut ekrandaki uygulamaları göster"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Açık pencereler için önizleme küçük resimlerini göster"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Açık pencerelerin sayısını göster (2'den fazlaysa)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -107,7 +107,7 @@ msgstr "Dikdörtgenler"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "Hiçbiri"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
@@ -115,7 +115,7 @@ msgstr "Gösterge yönü:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "Otomatik"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
@@ -135,7 +135,7 @@ msgstr "Sol"
 
 #: ../src/_dialogs.xml.h:20
 msgid "Active indicator:"
-msgstr ""
+msgstr "Aktif gösterge:"
 
 #: ../src/_dialogs.xml.h:21
 msgid "Force icon size:"
@@ -143,10 +143,9 @@ msgstr "Simgelerin boyutlarını zorla:"
 
 #: ../src/_dialogs.xml.h:22
 msgid "Inactive indicator:"
-msgstr ""
+msgstr "Aktif olmayan gösterge:"
 
 #: ../src/_dialogs.xml.h:23
-#, fuzzy
 msgid "Appearance"
 msgstr "Görünüm"
 

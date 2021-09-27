@@ -22,10 +22,7 @@ namespace Store
 	  public:
 		void push(K k, V v) { mList.push_front(std::make_pair(k, v)); }
 
-		void pushSecond(K k, V v)
-		{
-			mList.insert(std::next(mList.begin()), std::make_pair(k, v));
-		}
+		void pushSecond(K k, V v) { mList.insert(std::next(mList.begin()), std::make_pair(k, v)); }
 
 		V pop(K k)
 		{
@@ -99,6 +96,13 @@ namespace Store
 			return NULL;
 		}
 
+		void remove(K k)
+		{
+			typename std::map<const K, V>::iterator it = mMap.find(k);
+			if (it != mMap.end())
+				mMap.erase(it);
+		}
+
 	  private:
 		std::map<const K, V> mMap;
 	};
@@ -119,11 +123,6 @@ namespace Store
 			return std::distance(mList.begin(), it);
 		}
 
-		void forEach(std::function<void(V)> funct)
-		{
-			std::for_each(mList.begin(), mList.end(), funct);
-		}
-
 		V findIf(std::function<bool(V)> pred)
 		{
 			typename std::list<V>::iterator it = std::find_if(mList.begin(), mList.end(), pred);
@@ -133,6 +132,8 @@ namespace Store
 			return NULL;
 		}
 
+		void forEach(std::function<void(V)> funct) { std::for_each(mList.begin(), mList.end(), funct); }
+
 		uint size() { return mList.size(); }
 
 	  private:
@@ -140,4 +141,4 @@ namespace Store
 	};
 } // namespace Store
 
-#endif
+#endif // STORE_HPP

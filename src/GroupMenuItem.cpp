@@ -42,7 +42,7 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_widget_show(GTK_WIDGET(mLabel));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mLabel), 1, 0, 1, 1);
 
-	mCloseButton = GTK_BUTTON(gtk_button_new_from_icon_name("gtk-close", GTK_ICON_SIZE_MENU));
+	mCloseButton = GTK_BUTTON(gtk_button_new_from_icon_name("window-close", GTK_ICON_SIZE_MENU));
 	gtk_button_set_relief(mCloseButton, GTK_RELIEF_NONE);
 	gtk_widget_show(GTK_WIDGET(mCloseButton));
 	gtk_grid_attach(mGrid, GTK_WIDGET(mCloseButton), 2, 0, 1, 1);
@@ -52,6 +52,9 @@ GroupMenuItem::GroupMenuItem(GroupWindow* groupWindow)
 	gtk_widget_set_margin_bottom(GTK_WIDGET(mPreview), 6);
 	gtk_grid_attach(mGrid, GTK_WIDGET(mPreview), 0, 1, 3, 1);
 	gtk_widget_set_visible(GTK_WIDGET(mPreview), Settings::showPreviews);
+
+	if (Wnck::getActiveWindowXID() == wnck_window_get_xid(mGroupWindow->mWnckWindow))
+		Help::Gtk::cssClassAdd(GTK_WIDGET(mItem), "active_menu_item");
 
 	int sleepMS = 250;
 	if (Settings::previewSleep)

@@ -170,7 +170,7 @@ Group::Group(AppInfo* appInfo, bool pinned) : mGroupMenu(this)
 					w->mGroupMenuItem->mPreviewTimeout.stop();
 				});
 
-			return true;
+			return false;
 		}),
 		this);
 
@@ -242,6 +242,7 @@ void Group::activate(guint32 timestamp)
 	});
 
 	groupWindow->activate(timestamp);
+	onWindowActivate(groupWindow);
 }
 
 void Group::scrollWindows(guint32 timestamp, GdkScrollDirection direction)
@@ -274,8 +275,9 @@ void Group::closeAll()
 
 void Group::resize()
 {
-	gtk_widget_set_size_request(mButton, (round((Dock::mPanelSize * 1.2) / 2) * 2), Dock::mPanelSize);
-
+	// TODO: set `min-width` / `min-height` CSS property on button?
+	// https://github.com/davekeogh/xfce4-docklike-plugin/issues/39
+	
 	if (mIconPixbuf != NULL)
 		gtk_image_set_from_pixbuf(GTK_IMAGE(mImage),
 			gdk_pixbuf_scale_simple(mIconPixbuf, Dock::mIconSize, Dock::mIconSize, GDK_INTERP_HYPER));
@@ -683,7 +685,7 @@ void Group::onButtonRelease(GdkEventButton* event)
 		mAppInfo->launch();
 	else if (mActive)
 		mWindows.get(mTopWindowIndex)->minimize();
-	else if (!mActive)
+	else
 		activate(event->time);
 }
 
@@ -718,14 +720,14 @@ bool Group::onDragMotion(GtkWidget* widget, GdkDragContext* context, int x, int 
 		}
 	}
 
-	Help::Gtk::cssClassAdd(GTK_WIDGET(mButton), "drop_target");
+	gtk_drag_highlight(mButton);
 	gdk_drag_status(context, GDK_ACTION_MOVE, time);
 	return true;
 }
 
 void Group::onDragLeave(const GdkDragContext* context, guint time)
 {
-	Help::Gtk::cssClassRemove(GTK_WIDGET(mButton), "drop_target");
+	gtk_drag_unhighlight(mButton);
 }
 
 void Group::onDragDataGet(const GdkDragContext* context, GtkSelectionData* selectionData, guint info, guint time)

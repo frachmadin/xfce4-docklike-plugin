@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Docklike 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 16:46-0700\n"
+"POT-Creation-Date: 2021-09-22 21:34-0700\n"
 "PO-Revision-Date: 2021-07-20 18:38-0700\n"
-"Last-Translator: David Keogh <davidtkeogh@gmail.com>\n"
+"Last-Translator: SwampRabbit <swamprabbit@mxlinux.org>\n"
 "Language-Team: RU\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,28 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: ../src/Wnck.cpp:199
+#: ../src/Wnck.cpp:198
 msgid "Pinned to Dock"
-msgstr ""
+msgstr "Прикреплен к док-станции"
+
+#: ../src/Wnck.cpp:198
+msgid "Pin to Dock"
+msgstr "прикрепить к док-станции"
 
 #: ../src/Wnck.cpp:199
-msgid "Pin to Dock"
-msgstr ""
-
-#: ../src/Wnck.cpp:200
-#, fuzzy
 msgid "Edit Launcher"
-msgstr "Запустить"
+msgstr "Редактировать пусковую установку"
 
-#: ../src/Wnck.cpp:227
+#: ../src/Wnck.cpp:226
 msgid "Close All"
 msgstr "Закрыть все окна"
+
+#: ../src/Wnck.cpp:245
+msgid "Remove"
+msgstr ""
 
 #: ../src/SettingsDialog.cpp:197
 #, c-format
 msgid "<b>Only the first %u hotkeys(s) are enabled.</b>\n"
-msgstr ""
-"<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
+msgstr "<b>Не удалось активировать привязку для клавиш, идущих после %u.</b>\n"
 
 #: ../src/SettingsDialog.cpp:199
 #, c-format
@@ -56,34 +58,31 @@ msgstr "Простая и современная панель задач для 
 
 #: ../src/_dialogs.xml.h:1
 msgid "_Help"
-msgstr ""
+msgstr "_помощь"
 
 #: ../src/_dialogs.xml.h:2
 msgid "_Close"
-msgstr "Закрыть"
+msgstr "_Закрыть"
 
 #: ../src/_dialogs.xml.h:3
-#, fuzzy
 msgid "Don't show the window list for a single window"
-msgstr "Скрыть выпадающий список для одинарных окон"
+msgstr "Не показывать список окон для одного окна"
 
 #: ../src/_dialogs.xml.h:4
-#, fuzzy
 msgid "Only show applications on the current workspace"
 msgstr "Показывать окна только с текущего рабочего места"
 
 #: ../src/_dialogs.xml.h:5
-#, fuzzy
 msgid "Only show applications on the current display"
 msgstr "Показывать окна только с текущего монитора"
 
 #: ../src/_dialogs.xml.h:6
 msgid "Show preview thumbnails for open windows"
-msgstr ""
+msgstr "Показывать миниатюры предварительного просмотра для открытых окон"
 
 #: ../src/_dialogs.xml.h:7
 msgid "Show the number of open windows (if more than 2)"
-msgstr ""
+msgstr "Показать количество открытых окон (если их больше 2)"
 
 #: ../src/_dialogs.xml.h:8
 msgid "Behavior"
@@ -107,7 +106,7 @@ msgstr "Линии"
 
 #: ../src/_dialogs.xml.h:13
 msgid "None"
-msgstr ""
+msgstr "ничто"
 
 #: ../src/_dialogs.xml.h:14
 msgid "Indicator orientation:"
@@ -115,7 +114,7 @@ msgstr "Расположение индикатора:"
 
 #: ../src/_dialogs.xml.h:15
 msgid "Automatic"
-msgstr ""
+msgstr "автоматизированный"
 
 #: ../src/_dialogs.xml.h:16
 msgid "Bottom"
